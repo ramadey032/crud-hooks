@@ -42,14 +42,19 @@ const StreamList = () => {
     }
 
     return (
-        <div className="ui container">
-            <h2>Streams</h2>
-            <div className="ui celled list">{renderList()}</div>
-            <div style={{ textAlign: "right" }}>
-                <Link to="/streams/new" className="ui button primary">
-                    Create Stream
-                </Link>
+        <div class="ui horizontal list">
+            <div class="item">
+                <div class="content">
+                    <div class="header">Streams</div>
+                    <div className="ui celled list">{renderList()}</div>
+                    <div style={{ textAlign: "right" }}>
+                        <Link to="/streams/new" className="ui button primary">
+                            Create Stream
+                        </Link>
+                    </div>
+                </div>
             </div>
+
         </div>
     );
 };
