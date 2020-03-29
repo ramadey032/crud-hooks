@@ -1,28 +1,35 @@
 import React, { useState } from 'react';
-// import StreamForm from './StreamForm';
+import {createStream} from '../../services/createStream';
+import StreamForm from './StreamForm';
 
 
-const StreamCreate = () => {
+const StreamCreate = (props) => {
     const initialFormState = { title: '', description: '' }
     const [formData, setFormData] = useState(initialFormState);
 
     const handleInputChange = event => {
-        const { name, value } = event.target
-
+        const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
     }
 
+    const onFormSubmit = event => {
+        event.preventDefault();
+        if (!formData.title || !formData.description) return;
+
+        createStream(formData);
+        props.history.push('/');
+        setFormData(initialFormState);
+    };
 
     return (
         <div>
             Create a stream
-            <form>
-                <label>Title</label>
-                <input type="text" name="title" value={formData.title} onChange={handleInputChange} />
-                <label>Description</label>
-                <input type="text" name="description" value={formData.description} onChange={handleInputChange} />
-                <button>Create new stream</button>
-            </form>
+            <StreamForm 
+            actionType="Create new stream"
+            formData={formData}
+            onInputChange={handleInputChange}
+            onFormSubmit={onFormSubmit}
+            />
         </div>
     );
 };
